@@ -1,0 +1,67 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "./Header.astro";
+import OverlayMenu from "./OverlayMenu.astro";
+import Hero from "./Hero.astro";
+import Intro from "./Intro.astro";
+import Services from "./Services.astro";
+import Audience from "./Audience.astro";
+import Projects from "./Projects.astro";
+import About from "./About.astro";
+import Process from "./Process.astro";
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+import BackToTop from "./BackToTop.astro";
+import Lightbox from "./Lightbox.astro";
+import { type Lang } from "../i18n/ui";
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+---
+<Base lang={lang}>
+  <div class="curtain" id="curtain" aria-hidden="true">
+    <div class="curtain__mark">
+      <span class="curtain__name">ENDRIT KRASNIQI</span>
+      <span class="curtain__rule" aria-hidden="true"></span>
+    </div>
+  </div>
+  <script is:inline>
+    (function () { try {
+      var c = document.getElementById("curtain");
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var seen = null; try { seen = sessionStorage.getItem("ek-intro"); } catch (e) {}
+      if (c && !reduce && !seen) {
+        try { sessionStorage.setItem("ek-intro", "1"); } catch (e) {}
+        c.classList.add("is-active");
+        c.addEventListener("animationend", function (e) {
+          if (e.animationName === "curtainLift" && c.parentNode) c.parentNode.removeChild(c);
+        });
+      }
+    } catch (e) {} })();
+  </script>
+
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <div class="grid-lines" aria-hidden="true"></div>
+
+  <Header lang={lang} />
+  <OverlayMenu lang={lang} />
+
+  <main id="top">
+    <Hero lang={lang} />
+    <Intro lang={lang} />
+    <Services lang={lang} />
+    <Audience lang={lang} />
+    <Projects lang={lang} />
+    <About lang={lang} />
+    <Process lang={lang} />
+    <Contact lang={lang} />
+  </main>
+
+  <Footer lang={lang} />
+  <BackToTop lang={lang} />
+  <Lightbox lang={lang} />
+
+  <script>
+    import "../scripts/site.ts";
+  </script>
+</Base>

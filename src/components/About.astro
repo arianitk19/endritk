@@ -1,0 +1,29 @@
+---
+import { useTranslations } from "../i18n/utils";
+import { type Lang, type UIKey } from "../i18n/ui";
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const tags: UIKey[] = ["about.tag1", "about.tag2", "about.tag3", "about.tag4", "about.tag5"];
+---
+<section class="section shell" id="ueber">
+  <div class="section-head">
+    <span class="section-head__idx num">03</span>
+    <span class="section-head__title">{t("about.label")}</span>
+    <span class="section-head__meta">{t("about.meta")}</span>
+  </div>
+  <div class="about__grid">
+    <div class="reveal">
+      <h2 class="about__lead" set:html={t("about.lead")}></h2>
+      <div class="about__tags">
+        {tags.map((k) => (<span>{t(k)}</span>))}
+      </div>
+    </div>
+    <div class="reveal reveal-d1">
+      <div class="about__text">
+        <p>{t("about.body1")}</p>
+        <p>{t("about.body2")}</p>
+      </div>
+    </div>
+  </div>
+</section>

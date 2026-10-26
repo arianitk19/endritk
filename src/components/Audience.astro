@@ -1,0 +1,28 @@
+---
+import { useTranslations } from "../i18n/utils";
+import { type Lang } from "../i18n/ui";
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+<section class="section shell" id="fuer-wen">
+  <div class="section-head">
+    <span class="section-head__idx num">—</span>
+    <span class="section-head__title">{t("aud.label")}</span>
+    <span class="section-head__meta">{t("aud.meta")}</span>
+  </div>
+  <div class="audience__grid">
+    <article class="aud reveal">
+      <span class="aud__idx">{t("aud.priv.idx")}</span>
+      <h3 class="aud__title" set:html={t("aud.priv.t")}></h3>
+      <p class="aud__text">{t("aud.priv.d")}</p>
+      <a href="#kontakt" class="link-arrow"><span>{t("aud.priv.cta")}</span><span class="arrow" aria-hidden="true">→</span></a>
+    </article>
+    <article class="aud reveal reveal-d1">
+      <span class="aud__idx">{t("aud.mak.idx")}</span>
+      <h3 class="aud__title" set:html={t("aud.mak.t")}></h3>
+      <p class="aud__text">{t("aud.mak.d")}</p>
+      <a href="#kontakt" class="link-arrow"><span>{t("aud.mak.cta")}</span><span class="arrow" aria-hidden="true">→</span></a>
+    </article>
+  </div>
+</section>

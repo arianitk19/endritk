@@ -1,0 +1,25 @@
+---
+import { useTranslations } from "../i18n/utils";
+import { type Lang } from "../i18n/ui";
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Projektansicht">
+  <div class="lightbox__bar">
+    <span class="lightbox__count num"><b data-lb-current>01</b> / <span data-lb-total>11</span></span>
+    <button class="lb-close" data-lb-close aria-label={t("menu.close")}>
+      <span>{t("menu.close")}</span>
+      <span class="menu-close__x" aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="lightbox__stage">
+    <button class="lb-nav lb-prev" data-lb-prev aria-label={t("nav.prev")}><span class="lb-chevron" aria-hidden="true"></span></button>
+    <img class="lightbox__img" alt="" data-lb-image />
+    <button class="lb-nav lb-next" data-lb-next aria-label={t("nav.next")}><span class="lb-chevron" aria-hidden="true"></span></button>
+  </div>
+  <div class="lightbox__foot shell">
+    <h4 data-lb-title>—</h4>
+    <span class="pj__cat" data-lb-cat>—</span>
+  </div>
+</div>

@@ -1,0 +1,112 @@
+---
+import { useTranslations } from "../i18n/utils";
+import { type Lang } from "../i18n/ui";
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const options = [
+  { v: "grundriss", k: "form.opt.grundriss" },
+  { v: "aufmass", k: "form.opt.aufmass" },
+  { v: "renovierung", k: "form.opt.renovierung" },
+  { v: "raum", k: "form.opt.raum" },
+  { v: "moebel", k: "form.opt.moebel" },
+  { v: "3d", k: "form.opt.3d" },
+  { v: "immo", k: "form.opt.immo" },
+  { v: "sonstiges", k: "form.opt.sonstiges" },
+] as const;
+---
+<section class="section contact" id="kontakt">
+  <div class="shell">
+    <div class="section-head">
+      <span class="section-head__idx num">04</span>
+      <span class="section-head__title">{t("con.label")}</span>
+      <span class="section-head__meta">{t("con.meta")}</span>
+    </div>
+    <div class="contact__grid">
+      <div class="reveal">
+        <h2 class="contact__head" set:html={t("con.head")}></h2>
+        <p class="contact__lead">{t("con.lead")}</p>
+        <div class="contact__details">
+          <div class="contact__row">
+            <span class="k">{t("con.k.tel")}</span>
+            <a class="v" href="tel:+4917622844303">{t("con.v.tel")}</a>
+          </div>
+          <div class="contact__row">
+            <span class="k">{t("con.k.mail")}</span>
+            <a class="v" href="mailto:endritkrasniqi@live.com">{t("con.v.mail")}</a>
+          </div>
+          <div class="contact__row">
+            <span class="k">{t("con.k.wa")}</span>
+            <a class="v" href="https://wa.me/4917622844303" target="_blank" rel="noopener">{t("con.v.wa")}</a>
+          </div>
+          <div class="contact__row">
+            <span class="k">{t("con.k.area")}</span>
+            <span class="v">{t("con.v.area")}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal reveal-d1">
+        <form class="form" id="contactForm" novalidate
+              data-err-name={t("form.err.name")} data-err-type={t("form.err.type")}
+              data-err-msg={t("form.err.msg")} data-sending={t("form.sending")}>
+          <div class="form__row">
+            <div class="field">
+              <label for="name"><span>{t("form.name")}</span><span class="req" aria-hidden="true">*</span></label>
+              <input id="name" name="name" type="text" required autocomplete="name" placeholder={t("form.name.ph")} />
+              <span class="field__err" role="alert"></span>
+            </div>
+            <div class="field">
+              <label for="phone"><span>{t("form.tel")}</span><span>{t("form.optional")}</span></label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder={t("form.tel.ph")} />
+              <span class="field__err" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label id="ptypeLabel"><span>{t("form.type")}</span><span class="req" aria-hidden="true">*</span></label>
+            <div class="select" data-select>
+              <button type="button" class="select__trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ptypeLabel">
+                <span class="select__value is-placeholder" data-placeholder={t("form.opt.placeholder")}>{t("form.opt.placeholder")}</span>
+                <span class="select__chevron" aria-hidden="true"></span>
+              </button>
+              <ul class="select__panel" role="listbox" aria-labelledby="ptypeLabel" tabindex="-1"></ul>
+              <select id="ptype" name="ptype" required class="select__native visually-hidden" tabindex="-1" aria-hidden="true">
+                <option value="">{t("form.opt.placeholder")}</option>
+                {options.map((o) => (<option value={o.v}>{t(o.k)}</option>))}
+              </select>
+            </div>
+            <span class="field__err" role="alert"></span>
+          </div>
+
+          <div class="field">
+            <label for="message"><span>{t("form.msg")}</span><span class="req" aria-hidden="true">*</span></label>
+            <textarea id="message" name="message" rows="5" required placeholder={t("form.msg.ph")}></textarea>
+            <span class="field__err" role="alert"></span>
+          </div>
+
+          <div class="form__submit">
+            <button type="submit" class="btn btn--form">
+              <span>{t("form.submit")}</span>
+              <span class="arrow" aria-hidden="true">→</span>
+            </button>
+            <a href="tel:+4917622844303" class="link-arrow form__call"><span>{t("form.call")}</span></a>
+            <span class="form__spinner" aria-hidden="true"></span>
+          </div>
+        </form>
+
+        <div class="form-success" id="formSuccess" hidden role="status">
+          <span class="glyph" aria-hidden="true"></span>
+          <h3>{t("form.ok.title")}</h3>
+          <p>{t("form.ok.text")}</p>
+          <div style="margin-top:26px">
+            <button class="link-arrow" data-form-again style="color:var(--sand)">
+              <span>{t("form.ok.again")}</span>
+              <span class="arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

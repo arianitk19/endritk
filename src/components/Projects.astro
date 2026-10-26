@@ -1,0 +1,77 @@
+---
+import { Image, getImage } from "astro:assets";
+import { useTranslations } from "../i18n/utils";
+import { type Lang } from "../i18n/ui";
+import { projects } from "../data/projects";
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Build localized gallery items + a large source for the lightbox.
+const items = await Promise.all(
+  projects.map(async (p) => {
+    const full = await getImage({ src: p.image, width: 1800, format: "webp" });
+    return {
+      num: String(p.id).padStart(2, "0"),
+      title: t(p.titleKey),
+      cat: t(p.catKey),
+      fit: p.fit,
+      full: full.src,
+    };
+  })
+);
+const total = String(projects.length).padStart(2, "0");
+const first = items[0];
+---
+<section class="section shell" id="projekte">
+  <div class="section-head">
+    <span class="section-head__idx num">01</span>
+    <span class="section-head__title">{t("pj.label")}</span>
+    <span class="section-head__meta">{t("pj.meta")}</span>
+  </div>
+  <p class="intro__body reveal" style="max-width:52ch;margin-bottom:clamp(34px,4vw,60px)">{t("pj.intro")}</p>
+
+  <div id="projectsGrid">
+    <div class="showcase reveal in-view">
+      <div class="showcase__stage" data-stage tabindex="0" role="button" aria-label={t("pj.hint")}>
+        <div class="showcase__track" data-track>
+          {projects.map((p, i) => (
+            <div class="showcase__slide">
+              <Image
+                src={p.image}
+                widths={[480, 768, 1100, 1400]}
+                sizes="(min-width: 900px) 60vw, 100vw"
+                alt={`${t(p.titleKey)} — ${t(p.catKey)}`}
+                class={`showcase__img ${p.fit === "contain" ? "is-contain" : "is-cover"}`}
+                loading={i < 2 ? "eager" : "lazy"}
+                decoding="async"
+              />
+            </div>
+          ))}
+        </div>
+        <span class="showcase__progress" data-progress aria-hidden="true"></span>
+        <button class="showcase__nav sc-prev" data-prev type="button" aria-label={t("nav.prev")}><span class="sc-chev" aria-hidden="true"></span></button>
+        <button class="showcase__nav sc-next" data-next type="button" aria-label={t("nav.next")}><span class="sc-chev" aria-hidden="true"></span></button>
+        <span class="showcase__hint" aria-hidden="true">{t("pj.hint")}</span>
+      </div>
+
+      <div class="showcase__side">
+        <div class="showcase__meta">
+          <span class="showcase__num num" data-num>{first.num}</span>
+          <h3 class="showcase__title" data-title>{first.title}</h3>
+          <span class="showcase__cat" data-cat>{first.cat}</span>
+          <span class="showcase__count num"><b data-cur>01</b> / <span data-tot>{total}</span></span>
+        </div>
+        <div class="showcase__thumbs" data-thumbs>
+          {projects.map((p, i) => (
+            <button class={`showcase__thumb${i === 0 ? " is-active" : ""}`} data-thumb={i} type="button" aria-label={t(p.titleKey)} aria-current={i === 0 ? "true" : "false"}>
+              <Image src={p.image} width={220} alt="" loading="lazy" decoding="async" class={p.fit === "contain" ? "is-contain" : "is-cover"} />
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="application/json" data-showcase set:html={JSON.stringify(items)}></script>
+</section>

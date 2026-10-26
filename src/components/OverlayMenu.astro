@@ -1,0 +1,44 @@
+---
+import { useTranslations, homePath, allLangs } from "../i18n/utils";
+import { type Lang } from "../i18n/ui";
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const nav = [
+  { id: "projekte", key: "nav.projekte", idx: "01" },
+  { id: "leistungen", key: "nav.leistungen", idx: "02" },
+  { id: "ueber", key: "nav.ueber", idx: "03" },
+  { id: "kontakt", key: "nav.kontakt", idx: "04" },
+] as const;
+const labels: Record<Lang, string> = { de: "DE", en: "EN", sq: "SQ" };
+---
+<div class="overlay-menu" id="overlayMenu" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Navigation">
+  <div class="overlay-menu__top">
+    <span class="wordmark__name"><b>ENDRIT</b> <span class="thin">KRASNIQI</span></span>
+    <button class="menu-close" data-menu-close aria-label={t("menu.close")}>
+      <span class="menu-close__label">{t("menu.close")}</span>
+      <span class="menu-close__x" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <nav class="overlay-menu__nav" aria-label="Hauptnavigation mobil">
+    <ul>
+      {nav.map((n) => (
+        <li><a href={`#${n.id}`} data-menu-link><span class="idx num">{n.idx}</span><span class="word">{t(n.key)}</span></a></li>
+      ))}
+    </ul>
+  </nav>
+
+  <div class="overlay-menu__bottom">
+    <div class="overlay-menu__disc">
+      <span>{t("menu.disc1")}</span>
+      <span>{t("menu.disc2")}</span>
+      <span>{t("menu.disc3")}</span>
+    </div>
+    <div class="overlay-menu__lang" role="group" aria-label="Sprache / Language">
+      {allLangs.map((l) => (
+        <a href={homePath(l)} aria-current={l === lang ? "true" : "false"}>{labels[l]}</a>
+      ))}
+    </div>
+  </div>
+</div>

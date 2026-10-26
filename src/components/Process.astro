@@ -1,0 +1,30 @@
+---
+import { useTranslations } from "../i18n/utils";
+import { type Lang, type UIKey } from "../i18n/ui";
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const steps = [1, 2, 3, 4].map((n, i) => ({
+  num: String(n).padStart(2, "0"),
+  tKey: `proc.${n}.t` as UIKey,
+  dKey: `proc.${n}.d` as UIKey,
+  rev: i === 0 ? "reveal" : `reveal reveal-d${i}`,
+}));
+---
+<section class="section shell" id="ablauf">
+  <div class="section-head">
+    <span class="section-head__idx num">—</span>
+    <span class="section-head__title">{t("proc.label")}</span>
+    <span class="section-head__meta">{t("proc.meta")}</span>
+  </div>
+  <div class="process__grid">
+    {steps.map((s) => (
+      <article class={`step ${s.rev}`}>
+        <span class="step__idx num">{s.num}</span>
+        <span class="step__line"></span>
+        <h3 class="step__title">{t(s.tKey)}</h3>
+        <p class="step__text">{t(s.dKey)}</p>
+      </article>
+    ))}
+  </div>
+</section>

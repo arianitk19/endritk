@@ -1,0 +1,48 @@
+---
+import { useTranslations, homePath, allLangs } from "../i18n/utils";
+import { type Lang } from "../i18n/ui";
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+const nav = [
+  { id: "projekte", key: "nav.projekte" },
+  { id: "leistungen", key: "nav.leistungen" },
+  { id: "ueber", key: "nav.ueber" },
+  { id: "kontakt", key: "nav.kontakt" },
+] as const;
+const labels: Record<Lang, string> = { de: "DE", en: "EN", sq: "SQ" };
+---
+<footer class="footer">
+  <div class="shell">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <div class="fname">ENDRIT KRASNIQI</div>
+        <div class="ftag">{t("foot.tag")}</div>
+      </div>
+      <div class="footer__col">
+        <h5>{t("foot.nav")}</h5>
+        <ul>
+          {nav.map((n) => (<li><a href={`#${n.id}`}>{t(n.key)}</a></li>))}
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>{t("foot.legal")}</h5>
+        <ul>
+          <li><a href="#">{t("foot.impressum")}</a></li>
+          <li><a href="#">{t("foot.datenschutz")}</a></li>
+        </ul>
+        <h5 style="margin-top:28px">{t("foot.lang")}</h5>
+        <div class="footer__lang" role="group" aria-label="Sprache / Language">
+          {allLangs.map((l) => (
+            <a href={homePath(l)} aria-current={l === lang ? "true" : "false"}>{labels[l]}</a>
+          ))}
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="fmeta">© {year} Endrit Krasniqi — {t("foot.rights")}</span>
+      <span class="fmeta">{t("foot.made")}</span>
+    </div>
+  </div>
+</footer>

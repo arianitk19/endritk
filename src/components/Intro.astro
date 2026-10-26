@@ -1,0 +1,28 @@
+---
+import { useTranslations } from "../i18n/utils";
+import { type Lang } from "../i18n/ui";
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+<section class="section shell" id="intro">
+  <div class="section-head">
+    <span class="section-head__idx num">00</span>
+    <span class="section-head__title">{t("intro.label")}</span>
+    <span class="section-head__meta num">42.00° N</span>
+  </div>
+  <div class="intro__grid">
+    <h2 class="intro__statement reveal" set:html={t("intro.statement")}></h2>
+    <div class="reveal reveal-d1">
+      <div class="intro__body">
+        <p>{t("intro.body1")}</p>
+        <p>{t("intro.body2")}</p>
+      </div>
+      <div class="intro__meta">
+        <span>{t("intro.m1")}</span>
+        <span>{t("intro.m2")}</span>
+        <span>{t("intro.m3")}</span>
+      </div>
+    </div>
+  </div>
+</section>

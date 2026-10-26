@@ -1,0 +1,99 @@
+---
+import "@fontsource-variable/archivo";
+import "@fontsource/newsreader/300.css";
+import "@fontsource/newsreader/400.css";
+import "@fontsource/newsreader/300-italic.css";
+import "@fontsource/newsreader/400-italic.css";
+import "../styles/global.css";
+import { getImage } from "astro:assets";
+import { pwaInfo } from "virtual:pwa-info";
+import ogSource from "../assets/images/projekt-06.jpg";
+import { useTranslations, homePath, allLangs } from "../i18n/utils";
+import { languages, type Lang } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const canonical = new URL(homePath(lang), Astro.site).href;
+const localeMap: Record<Lang, string> = { de: "de_DE", en: "en", sq: "sq" };
+
+const og = await getImage({ src: ogSource, width: 1200, height: 630, format: "jpg" });
+const ogUrl = new URL(og.src, Astro.site).href;
+
+const ld = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Endrit Krasniqi",
+  url: "https://endritk.com/",
+  description: t("meta.desc"),
+  hasCredential: {
+    "@type": "EducationalOccupationalCredential",
+    credentialCategory: "degree",
+    name: "Bachelor of Arts in Architektur",
+  },
+  areaServed: "DE",
+  knowsLanguage: ["de", "en", "sq"],
+  telephone: "+4917622844303",
+  email: "endritkrasniqi@live.com",
+  makesOffer: [
+    "svc.1.t", "svc.2.t", "svc.3.t", "svc.4.t", "svc.5.t",
+    "svc.6.t", "svc.7.t", "svc.8.t", "svc.9.t",
+  ].map((k) => ({
+    "@type": "Offer",
+    itemOffered: { "@type": "Service", name: t(k as any) },
+  })),
+};
+---
+
+<!doctype html>
+<html lang={lang} dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{t("meta.title")}</title>
+    <meta name="description" content={t("meta.desc")} />
+    <meta name="author" content="Endrit Krasniqi" />
+    <meta name="theme-color" content="#F4F1EA" />
+    <meta name="color-scheme" content="light" />
+    <link rel="canonical" href={canonical} />
+
+    {allLangs.map((l) => (
+      <link rel="alternate" hreflang={l} href={new URL(homePath(l), Astro.site).href} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={new URL("/", Astro.site).href} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Endrit Krasniqi" />
+    <meta property="og:title" content={t("meta.title")} />
+    <meta property="og:description" content={t("meta.desc")} />
+    <meta property="og:locale" content={localeMap[lang]} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={t("meta.title")} />
+    <meta name="twitter:description" content={t("meta.desc")} />
+    <meta name="twitter:image" content={ogUrl} />
+
+    <!-- PWA -->
+    {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Endrit Krasniqi" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+  </head>
+  <body>
+    <slot />
+    <script>
+      import { registerSW } from "virtual:pwa-register";
+      registerSW({ immediate: true });
+    </script>
+  </body>
+</html>

@@ -1,13 +1,24 @@
 /* ============================================================
-   Translations — DE (default) · EN · SQ
-   Every user-facing string is keyed. Apply via data-i18n.
-   Positioning: private person offering plans, drawings and
-   visualisation for private clients — no own office.
+   i18n dictionary — DE (default) · EN · SQ
+   Keys are stable; translations live here as the single source.
    ============================================================ */
-const translations = {
+
+export const languages = {
+  de: "Deutsch",
+  en: "English",
+  sq: "Shqip",
+} as const;
+
+export const defaultLang = "de";
+export const showDefaultLang = false;
+
+export type Lang = keyof typeof languages;
+
+export const ui = {
   de: {
     "meta.title": "Endrit Krasniqi — Grundrisse, Zeichnungen & Visualisierung",
-    "meta.desc": "Grundrisse, Pläne, Aufmaß und 3D-Visualisierungen für Privatpersonen, Immobilienbesitzer und Architekturbüros – individuell und präzise.",
+    "meta.desc":
+      "Grundrisse, Pläne, Aufmaß und 3D-Visualisierungen für Privatpersonen, Immobilienbesitzer und Architekturbüros – individuell und präzise.",
 
     "nav.projekte": "Projekte",
     "nav.leistungen": "Leistungen",
@@ -17,6 +28,9 @@ const translations = {
     "menu.open": "Menü",
     "menu.close": "Schließen",
     "toTop": "Nach oben",
+    "nav.prev": "Vorheriges",
+    "nav.next": "Nächstes",
+    "pj.hint": "Zum Vergrößern klicken",
     "menu.disc1": "Zeichnung",
     "menu.disc2": "Gestaltung",
     "menu.disc3": "Visualisierung",
@@ -25,7 +39,8 @@ const translations = {
     "hero.t1": "Grundrisse.",
     "hero.t2": "Pläne.",
     "hero.t3": "3D-Visualisierungen.",
-    "hero.lead": "Ich unterstütze Privatpersonen, Immobilienbesitzer und Architekturbüros bei der Erstellung, Überarbeitung und digitalen Aufbereitung von Grundrissen und Immobilienplänen.",
+    "hero.lead":
+      "Ich unterstütze Privatpersonen, Immobilienbesitzer und Architekturbüros bei der Erstellung, Überarbeitung und digitalen Aufbereitung von Grundrissen und Immobilienplänen.",
     "hero.cta": "Projekt anfragen",
     "hero.cta2": "Projekte ansehen",
     "hero.scroll": "Scrollen",
@@ -35,8 +50,10 @@ const translations = {
 
     "intro.label": "Ansatz",
     "intro.statement": "Räume beginnen mit einem <em>guten Plan.</em>",
-    "intro.body1": "Ob Grundriss, Renovierung, Einrichtung oder Visualisierung – jedes Projekt beginnt mit einem klaren Verständnis für Raum, Funktion und Ästhetik.",
-    "intro.body2": "Jede Zeichnung, jedes Aufmaß und jede Darstellung entsteht mit Sorgfalt, damit aus einer Idee ein nachvollziehbares, umsetzbares Ergebnis wird.",
+    "intro.body1":
+      "Ob Grundriss, Renovierung, Einrichtung oder Visualisierung – jedes Projekt beginnt mit einem klaren Verständnis für Raum, Funktion und Ästhetik.",
+    "intro.body2":
+      "Jede Zeichnung, jedes Aufmaß und jede Darstellung entsteht mit Sorgfalt, damit aus einer Idee ein nachvollziehbares, umsetzbares Ergebnis wird.",
     "intro.m1": "Präzision",
     "intro.m2": "Funktion",
     "intro.m3": "Ästhetik",
@@ -57,16 +74,19 @@ const translations = {
     "aud.meta": "Wohnen & Immobilie",
     "aud.priv.idx": "Renovierung & Einrichtung",
     "aud.priv.t": "Für <span class='serif'>Ihr Zuhause</span>",
-    "aud.priv.d": "Sie möchten Ihre Wohnung renovieren, Räume neu aufteilen oder Ihre Einrichtung gestalten? Ich unterstütze Sie mit Aufmaß, Grundrissen, Möbelierung und 3D-Visualisierungen.",
+    "aud.priv.d":
+      "Sie möchten Ihre Wohnung renovieren, Räume neu aufteilen oder Ihre Einrichtung gestalten? Ich unterstütze Sie mit Aufmaß, Grundrissen, Möbelierung und 3D-Visualisierungen.",
     "aud.priv.cta": "Anfrage stellen",
     "aud.mak.idx": "Grundrisse & Aufmaß",
     "aud.mak.t": "Für <span class='serif'>Ihre Immobilie</span>",
-    "aud.mak.d": "Sie benötigen aktuelle Grundrisse, ein Aufmaß, eine Wohnflächenberechnung oder Visualisierungen? Ich bereite Ihre Unterlagen sauber und nachvollziehbar auf.",
+    "aud.mak.d":
+      "Sie benötigen aktuelle Grundrisse, ein Aufmaß, eine Wohnflächenberechnung oder Visualisierungen? Ich bereite Ihre Unterlagen sauber und nachvollziehbar auf.",
     "aud.mak.cta": "Anfrage stellen",
 
     "pj.label": "Projekte",
     "pj.meta": "Auswahl · Ausgewählte Arbeiten",
-    "pj.intro": "Eine Auswahl aus Grundrissen, Bestandsplänen, Raumkonzepten und Visualisierungen.",
+    "pj.intro":
+      "Eine Auswahl aus Grundrissen, Bestandsplänen, Raumkonzepten und Visualisierungen.",
     "pj.cat.plan": "Grundriss / Zeichnung",
     "pj.cat.bestand": "Bestandsplan / Ansichten",
     "pj.cat.flaeche": "Grundriss / Wohnflächen",
@@ -74,7 +94,6 @@ const translations = {
     "pj.cat.interior": "Innenraum / Visualisierung",
     "pj.cat.exterior": "Außenansicht / Visualisierung",
     "pj.cat.raum": "Raumgestaltung / 3D",
-    "pj.01": "Ansichten & Grundrisse",
     "pj.02": "Bestandsaufnahme",
     "pj.03": "Wohnflächenübersicht",
     "pj.04": "Schnitt am Hang",
@@ -89,9 +108,12 @@ const translations = {
 
     "about.label": "Über mich",
     "about.meta": "Persönlich · Präzise · Individuell",
-    "about.lead": "Als <em>Bachelor of Arts in Architektur</em> unterstütze ich Sie bei der Umsetzung Ihrer Ideen – von der Bestandsaufnahme und dem Aufmaß vor Ort über die Erstellung und Anpassung von Grundrissen bis hin zu 3D-Darstellungen und Visualisierungen.",
-    "about.body1": "Dabei lege ich Wert auf eine saubere, präzise und verständliche Darstellung, die genau zu Ihren Anforderungen passt.",
-    "about.body2": "Von der ersten Skizze bis zum fertigen Plan – persönlich, präzise und individuell.",
+    "about.lead":
+      "Als <em>Bachelor of Arts in Architektur</em> unterstütze ich Sie bei der Umsetzung Ihrer Ideen – von der Bestandsaufnahme und dem Aufmaß vor Ort über die Erstellung und Anpassung von Grundrissen bis hin zu 3D-Darstellungen und Visualisierungen.",
+    "about.body1":
+      "Dabei lege ich Wert auf eine saubere, präzise und verständliche Darstellung, die genau zu Ihren Anforderungen passt.",
+    "about.body2":
+      "Von der ersten Skizze bis zum fertigen Plan – persönlich, präzise und individuell.",
     "about.tag1": "Aufmaß",
     "about.tag2": "Grundrisse",
     "about.tag3": "3D-Visualisierung",
@@ -114,7 +136,8 @@ const translations = {
     "con.label": "Kontakt",
     "con.meta": "Projektanfrage",
     "con.head": "Lassen Sie uns Ihr <span class='serif'>Projekt umsetzen.</span>",
-    "con.lead": "Sie haben einen Grundriss, ein Renovierungsvorhaben oder eine Idee für einen Raum? Schreiben Sie mir gerne.",
+    "con.lead":
+      "Sie haben einen Grundriss, ein Renovierungsvorhaben oder eine Idee für einen Raum? Schreiben Sie mir gerne.",
     "con.k.tel": "Telefon",
     "con.k.mail": "E-Mail",
     "con.k.wa": "WhatsApp",
@@ -149,11 +172,11 @@ const translations = {
     "form.opt.sonstiges": "Sonstiges",
     "form.opt.placeholder": "Bitte wählen",
     "form.err.name": "Bitte geben Sie Ihren Namen ein.",
-    "form.err.mail": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
     "form.err.type": "Bitte wählen Sie eine Projektart.",
     "form.err.msg": "Bitte beschreiben Sie kurz Ihr Vorhaben.",
     "form.ok.title": "Fast geschafft.",
-    "form.ok.text": "WhatsApp wurde mit Ihrer Anfrage geöffnet – bitte nur noch senden. Alternativ erreichen Sie mich telefonisch unter +49 176 22844303.",
+    "form.ok.text":
+      "WhatsApp wurde mit Ihrer Anfrage geöffnet – bitte nur noch senden. Alternativ erreichen Sie mich telefonisch unter +49 176 22844303.",
     "form.ok.again": "Neue Anfrage",
 
     "foot.tag": "Zeichnung · Gestaltung · Visualisierung",
@@ -163,12 +186,13 @@ const translations = {
     "foot.impressum": "Impressum",
     "foot.datenschutz": "Datenschutz",
     "foot.rights": "Alle Rechte vorbehalten.",
-    "foot.made": "Individuell und nebenberuflich — persönlich umgesetzt"
+    "foot.made": "Individuell und nebenberuflich — persönlich umgesetzt",
   },
 
   en: {
     "meta.title": "Endrit Krasniqi — Floor Plans, Drawings & Visualisation",
-    "meta.desc": "Floor plans, plans, measurements and 3D visualisations for private clients, property owners and architecture offices – individual and precise.",
+    "meta.desc":
+      "Floor plans, plans, measurements and 3D visualisations for private clients, property owners and architecture offices – individual and precise.",
 
     "nav.projekte": "Projects",
     "nav.leistungen": "Services",
@@ -178,6 +202,9 @@ const translations = {
     "menu.open": "Menu",
     "menu.close": "Close",
     "toTop": "Back to top",
+    "nav.prev": "Previous",
+    "nav.next": "Next",
+    "pj.hint": "Click to enlarge",
     "menu.disc1": "Drawing",
     "menu.disc2": "Design",
     "menu.disc3": "Visualisation",
@@ -186,7 +213,8 @@ const translations = {
     "hero.t1": "Floor plans.",
     "hero.t2": "Plans.",
     "hero.t3": "3D visualisations.",
-    "hero.lead": "I support private clients, property owners and architecture offices in creating, revising and digitally preparing floor plans and property plans.",
+    "hero.lead":
+      "I support private clients, property owners and architecture offices in creating, revising and digitally preparing floor plans and property plans.",
     "hero.cta": "Request project",
     "hero.cta2": "View projects",
     "hero.scroll": "Scroll",
@@ -196,8 +224,10 @@ const translations = {
 
     "intro.label": "Approach",
     "intro.statement": "Spaces begin with a <em>good plan.</em>",
-    "intro.body1": "Whether a floor plan, a renovation, an interior or a visualisation — every project begins with a clear understanding of space, function and aesthetics.",
-    "intro.body2": "Every drawing, measurement and rendering is created with care, so an idea becomes a clear, workable result.",
+    "intro.body1":
+      "Whether a floor plan, a renovation, an interior or a visualisation — every project begins with a clear understanding of space, function and aesthetics.",
+    "intro.body2":
+      "Every drawing, measurement and rendering is created with care, so an idea becomes a clear, workable result.",
     "intro.m1": "Precision",
     "intro.m2": "Function",
     "intro.m3": "Aesthetics",
@@ -218,16 +248,19 @@ const translations = {
     "aud.meta": "Living & Property",
     "aud.priv.idx": "Renovation & interiors",
     "aud.priv.t": "For <span class='serif'>your home</span>",
-    "aud.priv.d": "Would you like to renovate your home, rearrange rooms or arrange your interior? I support you with measurements, floor plans, furnishing and 3D visualisations.",
+    "aud.priv.d":
+      "Would you like to renovate your home, rearrange rooms or arrange your interior? I support you with measurements, floor plans, furnishing and 3D visualisations.",
     "aud.priv.cta": "Send request",
     "aud.mak.idx": "Floor plans & measurement",
     "aud.mak.t": "For <span class='serif'>your property</span>",
-    "aud.mak.d": "Do you need up-to-date floor plans, a measurement, a living-space calculation or visualisations? I prepare your documents cleanly and clearly.",
+    "aud.mak.d":
+      "Do you need up-to-date floor plans, a measurement, a living-space calculation or visualisations? I prepare your documents cleanly and clearly.",
     "aud.mak.cta": "Send request",
 
     "pj.label": "Projects",
     "pj.meta": "Selection · Selected work",
-    "pj.intro": "A selection of floor plans, as-built drawings, room concepts and visualisations.",
+    "pj.intro":
+      "A selection of floor plans, as-built drawings, room concepts and visualisations.",
     "pj.cat.plan": "Floor plan / Drawing",
     "pj.cat.bestand": "As-built plan / Elevations",
     "pj.cat.flaeche": "Floor plan / Living space",
@@ -235,7 +268,6 @@ const translations = {
     "pj.cat.interior": "Interior / Visualisation",
     "pj.cat.exterior": "Exterior / Visualisation",
     "pj.cat.raum": "Interior design / 3D",
-    "pj.01": "Elevations & floor plans",
     "pj.02": "As-built survey",
     "pj.03": "Living-space overview",
     "pj.04": "Section on a slope",
@@ -250,9 +282,12 @@ const translations = {
 
     "about.label": "About",
     "about.meta": "Personal · Precise · Individual",
-    "about.lead": "As a <em>Bachelor of Arts in Architecture</em>, I help you realise your ideas – from on-site survey and measurement, through the creation and adaptation of floor plans, to 3D representations and visualisations.",
-    "about.body1": "I place great value on a clean, precise and understandable representation that fits your requirements exactly.",
-    "about.body2": "From the first sketch to the finished plan – personal, precise and individual.",
+    "about.lead":
+      "As a <em>Bachelor of Arts in Architecture</em>, I help you realise your ideas – from on-site survey and measurement, through the creation and adaptation of floor plans, to 3D representations and visualisations.",
+    "about.body1":
+      "I place great value on a clean, precise and understandable representation that fits your requirements exactly.",
+    "about.body2":
+      "From the first sketch to the finished plan – personal, precise and individual.",
     "about.tag1": "Measurement",
     "about.tag2": "Floor plans",
     "about.tag3": "3D visualisation",
@@ -275,7 +310,8 @@ const translations = {
     "con.label": "Contact",
     "con.meta": "Project request",
     "con.head": "Let's bring your <span class='serif'>project to life.</span>",
-    "con.lead": "Do you have a floor plan, a renovation project or an idea for a space? Feel free to write to me.",
+    "con.lead":
+      "Do you have a floor plan, a renovation project or an idea for a space? Feel free to write to me.",
     "con.k.tel": "Phone",
     "con.k.mail": "E-mail",
     "con.k.wa": "WhatsApp",
@@ -310,11 +346,11 @@ const translations = {
     "form.opt.sonstiges": "Other",
     "form.opt.placeholder": "Please select",
     "form.err.name": "Please enter your name.",
-    "form.err.mail": "Please enter a valid e-mail address.",
     "form.err.type": "Please choose a project type.",
     "form.err.msg": "Please briefly describe your project.",
     "form.ok.title": "Almost done.",
-    "form.ok.text": "WhatsApp has opened with your request — just hit send. You can also reach me by phone at +49 176 22844303.",
+    "form.ok.text":
+      "WhatsApp has opened with your request — just hit send. You can also reach me by phone at +49 176 22844303.",
     "form.ok.again": "New request",
 
     "foot.tag": "Drawing · Design · Visualisation",
@@ -324,12 +360,13 @@ const translations = {
     "foot.impressum": "Imprint",
     "foot.datenschutz": "Privacy",
     "foot.rights": "All rights reserved.",
-    "foot.made": "Individual, alongside a main profession"
+    "foot.made": "Individual, alongside a main profession",
   },
 
   sq: {
     "meta.title": "Endrit Krasniqi — Planimetri, Vizatime & Vizualizim",
-    "meta.desc": "Planimetri, plane, matje dhe vizualizime 3D për persona privatë, pronarë pronash dhe zyra arkitekture – individuale dhe precize.",
+    "meta.desc":
+      "Planimetri, plane, matje dhe vizualizime 3D për persona privatë, pronarë pronash dhe zyra arkitekture – individuale dhe precize.",
 
     "nav.projekte": "Projektet",
     "nav.leistungen": "Shërbimet",
@@ -339,6 +376,9 @@ const translations = {
     "menu.open": "Menyja",
     "menu.close": "Mbyll",
     "toTop": "Lart",
+    "nav.prev": "Mëparshëm",
+    "nav.next": "Tjetër",
+    "pj.hint": "Kliko për ta zmadhuar",
     "menu.disc1": "Vizatim",
     "menu.disc2": "Dizajn",
     "menu.disc3": "Vizualizim",
@@ -347,7 +387,8 @@ const translations = {
     "hero.t1": "Planimetri.",
     "hero.t2": "Plane.",
     "hero.t3": "Vizualizime 3D.",
-    "hero.lead": "Mbështes persona privatë, pronarë pronash dhe zyra arkitekture në krijimin, rishikimin dhe përgatitjen digjitale të planimetrive dhe planeve të pronave.",
+    "hero.lead":
+      "Mbështes persona privatë, pronarë pronash dhe zyra arkitekture në krijimin, rishikimin dhe përgatitjen digjitale të planimetrive dhe planeve të pronave.",
     "hero.cta": "Kërko projekt",
     "hero.cta2": "Shiko projektet",
     "hero.scroll": "Rrëshqit",
@@ -357,8 +398,10 @@ const translations = {
 
     "intro.label": "Qasja",
     "intro.statement": "Hapësirat fillojnë me një <em>plan të mirë.</em>",
-    "intro.body1": "Qoftë planimetri, renovim, mobilim apo vizualizim — çdo projekt fillon me një kuptim të qartë të hapësirës, funksionit dhe estetikës.",
-    "intro.body2": "Çdo vizatim, matje dhe paraqitje krijohet me kujdes, që një ide të kthehet në një rezultat të qartë e të realizueshëm.",
+    "intro.body1":
+      "Qoftë planimetri, renovim, mobilim apo vizualizim — çdo projekt fillon me një kuptim të qartë të hapësirës, funksionit dhe estetikës.",
+    "intro.body2":
+      "Çdo vizatim, matje dhe paraqitje krijohet me kujdes, që një ide të kthehet në një rezultat të qartë e të realizueshëm.",
     "intro.m1": "Precizitet",
     "intro.m2": "Funksion",
     "intro.m3": "Estetikë",
@@ -379,16 +422,19 @@ const translations = {
     "aud.meta": "Banimi & Prona",
     "aud.priv.idx": "Renovim & mobilim",
     "aud.priv.t": "Për <span class='serif'>shtëpinë tuaj</span>",
-    "aud.priv.d": "Doni të renovoni banesën, të riorganizoni hapësirat ose të rregulloni mobilimin? Ju mbështes me matje, planimetri, mobilim dhe vizualizime 3D.",
+    "aud.priv.d":
+      "Doni të renovoni banesën, të riorganizoni hapësirat ose të rregulloni mobilimin? Ju mbështes me matje, planimetri, mobilim dhe vizualizime 3D.",
     "aud.priv.cta": "Dërgo kërkesë",
     "aud.mak.idx": "Planimetri & matje",
     "aud.mak.t": "Për <span class='serif'>pronën tuaj</span>",
-    "aud.mak.d": "Ju duhen planimetri të përditësuara, matje, llogaritje sipërfaqesh ose vizualizime? I përgatis dokumentet tuaja pastër dhe qartë.",
+    "aud.mak.d":
+      "Ju duhen planimetri të përditësuara, matje, llogaritje sipërfaqesh ose vizualizime? I përgatis dokumentet tuaja pastër dhe qartë.",
     "aud.mak.cta": "Dërgo kërkesë",
 
     "pj.label": "Projektet",
     "pj.meta": "Përzgjedhje · Punë të zgjedhura",
-    "pj.intro": "Një përzgjedhje planimetrish, planesh të gjendjes, konceptesh hapësire dhe vizualizimesh.",
+    "pj.intro":
+      "Një përzgjedhje planimetrish, planesh të gjendjes, konceptesh hapësire dhe vizualizimesh.",
     "pj.cat.plan": "Planimetri / Vizatim",
     "pj.cat.bestand": "Plan i gjendjes / Pamje",
     "pj.cat.flaeche": "Planimetri / Sipërfaqe",
@@ -396,7 +442,6 @@ const translations = {
     "pj.cat.interior": "Ambient i brendshëm / Vizualizim",
     "pj.cat.exterior": "Pamje e jashtme / Vizualizim",
     "pj.cat.raum": "Dizajn ambienti / 3D",
-    "pj.01": "Pamje & planimetri",
     "pj.02": "Rilevim i gjendjes",
     "pj.03": "Pasqyrë e sipërfaqeve",
     "pj.04": "Prerje në pjerrësi",
@@ -411,9 +456,12 @@ const translations = {
 
     "about.label": "Rreth meje",
     "about.meta": "Personale · Precize · Individuale",
-    "about.lead": "Si <em>i diplomuar në Arkitekturë</em> (Bachelor of Arts), ju ndihmoj të realizoni idetë tuaja – nga rilevimi dhe matja në terren, te krijimi dhe përshtatja e planimetrive, deri te paraqitjet dhe vizualizimet 3D.",
-    "about.body1": "I kushtoj rëndësi një paraqitjeje të pastër, precize dhe të kuptueshme, që i përshtatet saktësisht kërkesave tuaja.",
-    "about.body2": "Nga skica e parë te plani përfundimtar – personalisht, me precizitet dhe individualisht.",
+    "about.lead":
+      "Si <em>i diplomuar në Arkitekturë</em> (Bachelor of Arts), ju ndihmoj të realizoni idetë tuaja – nga rilevimi dhe matja në terren, te krijimi dhe përshtatja e planimetrive, deri te paraqitjet dhe vizualizimet 3D.",
+    "about.body1":
+      "I kushtoj rëndësi një paraqitjeje të pastër, precize dhe të kuptueshme, që i përshtatet saktësisht kërkesave tuaja.",
+    "about.body2":
+      "Nga skica e parë te plani përfundimtar – personalisht, me precizitet dhe individualisht.",
     "about.tag1": "Matje",
     "about.tag2": "Planimetri",
     "about.tag3": "Vizualizim 3D",
@@ -436,7 +484,8 @@ const translations = {
     "con.label": "Kontakti",
     "con.meta": "Kërkesë projekti",
     "con.head": "Le ta realizojmë <span class='serif'>projektin tuaj.</span>",
-    "con.lead": "Keni një planimetri, një projekt renovimi ose një ide për një hapësirë? Më shkruani lirisht.",
+    "con.lead":
+      "Keni një planimetri, një projekt renovimi ose një ide për një hapësirë? Më shkruani lirisht.",
     "con.k.tel": "Telefon",
     "con.k.mail": "E-mail",
     "con.k.wa": "WhatsApp",
@@ -471,11 +520,11 @@ const translations = {
     "form.opt.sonstiges": "Tjetër",
     "form.opt.placeholder": "Ju lutem zgjidhni",
     "form.err.name": "Ju lutem shkruani emrin tuaj.",
-    "form.err.mail": "Ju lutem shkruani një adresë e-mail të vlefshme.",
     "form.err.type": "Ju lutem zgjidhni një lloj projekti.",
     "form.err.msg": "Ju lutem përshkruani shkurt projektin tuaj.",
     "form.ok.title": "Gati sa s'u krye.",
-    "form.ok.text": "WhatsApp u hap me kërkesën tuaj — vetëm dërgojeni. Mund të më kontaktoni edhe në telefon: +49 176 22844303.",
+    "form.ok.text":
+      "WhatsApp u hap me kërkesën tuaj — vetëm dërgojeni. Mund të më kontaktoni edhe në telefon: +49 176 22844303.",
     "form.ok.again": "Kërkesë e re",
 
     "foot.tag": "Vizatim · Dizajn · Vizualizim",
@@ -485,11 +534,8 @@ const translations = {
     "foot.impressum": "Impresum",
     "foot.datenschutz": "Privatësia",
     "foot.rights": "Të gjitha të drejtat e rezervuara.",
-    "foot.made": "Individuale dhe si veprimtari plotësuese — realizuar personalisht"
-  }
-};
+    "foot.made": "Individuale dhe si veprimtari plotësuese — realizuar personalisht",
+  },
+} as const;
 
-const SUPPORTED_LANGS = ["de", "en", "sq"];
-const DEFAULT_LANG = "de";
-
-if (typeof window !== "undefined") window.translations = translations;
+export type UIKey = keyof (typeof ui)["de"];

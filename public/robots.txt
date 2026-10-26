@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://endritk.com/sitemap-index.xml

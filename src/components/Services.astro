@@ -1,0 +1,23 @@
+---
+import { useTranslations } from "../i18n/utils";
+import { type Lang, type UIKey } from "../i18n/ui";
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const items = Array.from({ length: 9 }, (_, i) => ({
+  num: String(i + 1).padStart(2, "0"),
+  key: `svc.${i + 1}.t` as UIKey,
+}));
+---
+<section class="section shell services" id="leistungen">
+  <div class="section-head">
+    <span class="section-head__idx num">02</span>
+    <span class="section-head__title">{t("svc.label")}</span>
+    <span class="section-head__meta">{t("svc.meta")}</span>
+  </div>
+  <div class="lst">
+    {items.map((it) => (
+      <div class="lst__row reveal"><span class="lst__num num">{it.num}</span><span class="lst__t">{t(it.key)}</span></div>
+    ))}
+  </div>
+</section>

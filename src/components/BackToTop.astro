@@ -1,0 +1,16 @@
+---
+import { useTranslations } from "../i18n/utils";
+import { type Lang } from "../i18n/ui";
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+<button class="to-top" data-to-top type="button" aria-label={t("toTop")}>
+  <svg class="to-top__ring" viewBox="0 0 72 72" aria-hidden="true">
+    <circle class="to-top__track" cx="36" cy="36" r="33"></circle>
+    <circle class="to-top__prog" cx="36" cy="36" r="33"></circle>
+  </svg>
+  <span class="to-top__disc" aria-hidden="true"></span>
+  <span class="to-top__arrow" aria-hidden="true"><span class="ar">↑</span><span class="ar">↑</span></span>
+  <span class="to-top__label">{t("toTop")}</span>
+</button>

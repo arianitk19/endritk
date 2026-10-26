@@ -1,0 +1,42 @@
+---
+import { useTranslations, homePath, allLangs } from "../i18n/utils";
+import { type Lang } from "../i18n/ui";
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const nav = [
+  { id: "projekte", key: "nav.projekte", idx: "01" },
+  { id: "leistungen", key: "nav.leistungen", idx: "02" },
+  { id: "ueber", key: "nav.ueber", idx: "03" },
+  { id: "kontakt", key: "nav.kontakt", idx: "04" },
+] as const;
+const labels: Record<Lang, string> = { de: "DE", en: "EN", sq: "SQ" };
+---
+<header class="header">
+  <div class="header__inner">
+    <a href={homePath(lang)} class="wordmark" aria-label="Endrit Krasniqi — Startseite">
+      <span class="wordmark__name"><b>ENDRIT</b> <span class="thin">KRASNIQI</span></span>
+    </a>
+
+    <div class="nav-desktop-wrap">
+      <nav class="nav-desktop" aria-label="Hauptnavigation">
+        {nav.map((n) => (
+          <a href={`#${n.id}`}><span class="idx num">{n.idx}</span><span>{t(n.key)}</span></a>
+        ))}
+      </nav>
+      <div class="lang" role="group" aria-label="Sprache / Language">
+        {allLangs.map((l) => (
+          <a href={homePath(l)} aria-current={l === lang ? "true" : "false"}>{labels[l]}</a>
+        ))}
+      </div>
+    </div>
+
+    <div class="header__right">
+      <button class="menu-btn" data-menu-open aria-label="Menü" aria-controls="overlayMenu" aria-expanded="false">
+        <span class="menu-btn__idx num">01</span>
+        <span class="menu-btn__label">{t("menu.open")}</span>
+        <span class="menu-btn__lines" aria-hidden="true"><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
