@@ -27,8 +27,8 @@ export default defineConfig({
       injectRegister: false,
       includeAssets: ["icons/*.png"],
       manifest: {
-        name: "Endrit Krasniqi — Grundrisse, Pläne & 3D-Visualisierungen",
-        short_name: "Endrit Krasniqi",
+        name: "Endrit Arch — Grundrisse, Pläne & 3D-Visualisierungen",
+        short_name: "Endrit Arch",
         description:
           "Grundrisse, Pläne, Aufmaß und 3D-Visualisierungen – individuell und präzise.",
         lang: "de",
