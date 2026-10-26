@@ -1608,18 +1608,17 @@ body { background: var(--paper); }
 .hero__title .accent { font-weight: 420; letter-spacing: -0.01em; }
 .lightbox__foot h4 { font-weight: 400; }
 
-/* ---- Brilliant reveal — rise + de-blur with a refined curve ---- */
+/* ---- Reveal — clean fade + rise, no blur ---- */
 .reveal {
-  opacity: 0; transform: translateY(32px); filter: blur(7px);
-  transition: opacity 1s cubic-bezier(0.19, 0.8, 0.24, 1),
-              transform 1.15s cubic-bezier(0.19, 0.8, 0.24, 1),
-              filter 0.9s cubic-bezier(0.19, 0.8, 0.24, 1);
-  will-change: opacity, transform, filter;
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.19, 0.8, 0.24, 1),
+              transform 1s cubic-bezier(0.19, 0.8, 0.24, 1);
+  will-change: opacity, transform;
 }
-.reveal.in-view { opacity: 1; transform: translateY(0); filter: blur(0); }
-.reveal-d1 { transition-delay: 0.1s; }
-.reveal-d2 { transition-delay: 0.2s; }
-.reveal-d3 { transition-delay: 0.3s; }
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+.reveal-d1 { transition-delay: 0.09s; }
+.reveal-d2 { transition-delay: 0.18s; }
+.reveal-d3 { transition-delay: 0.27s; }
 
 /* ---- Desktop nav — more elegant, architectural active state ---- */
 @media (min-width: 1000px) {
@@ -1666,4 +1665,12 @@ body { background: var(--paper); }
   .reveal { opacity: 1 !important; transform: none !important; filter: none !important; }
   .showcase__img, .showcase__track { transition: none !important; }
   .showcase__slide.is-active .showcase__img.is-cover { transform: none !important; }
+}
+
+/* ---- Hero backdrop — subtle premium depth (very restrained) ---- */
+.hero--light::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(118% 88% at 76% 20%, rgba(255,255,255,0.55), rgba(244,241,234,0) 58%),
+    radial-gradient(96% 82% at 50% 122%, rgba(26,26,24,0.055), rgba(244,241,234,0) 54%);
 }
