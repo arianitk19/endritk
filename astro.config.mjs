@@ -7,6 +7,7 @@ import compress from "@playform/compress";
 export default defineConfig({
   site: "https://endritk.com",
   trailingSlash: "ignore",
+  prefetch: { prefetchAll: true, defaultStrategy: "viewport" },
   i18n: {
     defaultLocale: "de",
     locales: ["de", "en", "sq"],

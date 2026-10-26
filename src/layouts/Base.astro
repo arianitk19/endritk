@@ -6,6 +6,7 @@ import "../styles/global.css";
 import { getImage } from "astro:assets";
 import { pwaInfo } from "virtual:pwa-info";
 import ogSource from "../assets/images/projekt-06.jpg";
+import { ClientRouter } from "astro:transitions";
 import { useTranslations, homePath, allLangs } from "../i18n/utils";
 import { languages, type Lang } from "../i18n/ui";
 
@@ -86,6 +87,7 @@ const ld = {
     <meta name="apple-mobile-web-app-title" content="Endrit Krasniqi" />
 
     <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+    <ClientRouter />
   </head>
   <body>
     <slot />

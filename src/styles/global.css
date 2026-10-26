@@ -1586,10 +1586,9 @@ body.menu-open { overflow: hidden; }
 html { background: var(--paper); }
 body { background: var(--paper); }
 
-/* ---- Elegant page cross-fade between languages (native, zero-JS) ---- */
-@view-transition { navigation: auto; }
+/* ---- Elegant page cross-fade (ClientRouter handles navigation) ---- */
 ::view-transition-old(root),
-::view-transition-new(root) { animation-duration: 0.55s; animation-timing-function: var(--ease); }
+::view-transition-new(root) { animation-duration: 0.42s; animation-timing-function: var(--ease); }
 
 /* ---- Fraunces: optical, refined weights for an editorial feel ---- */
 .serif,
@@ -1673,4 +1672,25 @@ body { background: var(--paper); }
   background:
     radial-gradient(118% 88% at 76% 20%, rgba(255,255,255,0.55), rgba(244,241,234,0) 58%),
     radial-gradient(96% 82% at 50% 122%, rgba(26,26,24,0.055), rgba(244,241,234,0) 54%);
+}
+
+/* ---- Showcase — elegant curtain reveal (replaces horizontal slide) ---- */
+.showcase__track { position: absolute; inset: 0; display: block; transition: none; }
+.showcase__slide {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  opacity: 0; visibility: hidden; z-index: 0;
+  transition: opacity 0.9s var(--ease), visibility 0s linear 0.9s;
+}
+.showcase__slide.is-active {
+  opacity: 1; visibility: visible; z-index: 1;
+  transition: opacity 0.9s var(--ease), visibility 0s;
+  animation: scReveal 1.25s cubic-bezier(0.19, 0.8, 0.24, 1);
+}
+@keyframes scReveal {
+  0%   { clip-path: inset(0 0 100% 0); opacity: 0; }
+  100% { clip-path: inset(0 0 0 0); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .showcase__slide { transition: opacity 0.25s linear; }
+  .showcase__slide.is-active { animation: none; }
 }
