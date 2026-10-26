@@ -186,6 +186,7 @@ function lbClose() {
   if (LB.tot) LB.tot.textContent = String(items.length).padStart(2, "0");
 
   const track = $<HTMLElement>("[data-track]", grid);
+  const slides = $$<HTMLElement>(".showcase__slide", grid);
   const thumbs = $$("[data-thumb]", grid);
   const stage = $<HTMLElement>("[data-stage]", grid);
   const elNum = $("[data-num]", grid);
@@ -205,9 +206,16 @@ function lbClose() {
       prog.classList.add("run");
     }
   }
+  function swap(el: Element | null) {
+    if (!el) return;
+    el.classList.remove("is-swap");
+    void (el as HTMLElement).offsetWidth;
+    el.classList.add("is-swap");
+  }
   function go(i: number) {
     idx = (i + items.length) % items.length;
     if (track) track.style.transform = `translateX(${-idx * 100}%)`;
+    slides.forEach((s, k) => s.classList.toggle("is-active", k === idx));
     thumbs.forEach((t, k) => {
       t.classList.toggle("is-active", k === idx);
       t.setAttribute("aria-current", k === idx ? "true" : "false");
@@ -223,6 +231,7 @@ function lbClose() {
     if (elTitle) elTitle.textContent = it.title;
     if (elCat) elCat.textContent = it.cat;
     if (elCur) elCur.textContent = String(idx + 1).padStart(2, "0");
+    if (!reduce) { swap(elTitle); swap(elCat); swap(elNum); }
     runProgress();
   }
   function schedule() {
@@ -387,4 +396,34 @@ function lbClose() {
     if (success) success.hidden = true;
     form.hidden = false;
   });
+})();
+
+/* ---------- Scroll-spy for the desktop nav ---------- */
+(() => {
+  const links = $$<HTMLAnchorElement>(".nav-desktop a[href^='#']");
+  if (!links.length || !("IntersectionObserver" in window)) return;
+  const map = new Map<string, HTMLAnchorElement>();
+  const sections: Element[] = [];
+  links.forEach((a) => {
+    const id = a.getAttribute("href")!.slice(1);
+    const sec = document.getElementById(id);
+    if (sec) { map.set(id, a); sections.push(sec); }
+  });
+  let current = "";
+  const io = new IntersectionObserver(
+    (ents) => {
+      ents.forEach((en) => {
+        if (en.isIntersecting) {
+          const id = (en.target as HTMLElement).id;
+          if (id !== current) {
+            current = id;
+            links.forEach((l) => l.classList.remove("is-active"));
+            map.get(id)?.classList.add("is-active");
+          }
+        }
+      });
+    },
+    { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+  );
+  sections.forEach((s) => io.observe(s));
 })();
